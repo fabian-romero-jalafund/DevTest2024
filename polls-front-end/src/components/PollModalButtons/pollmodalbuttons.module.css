@@ -1,0 +1,10 @@
+.buttonsContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.buttonText {
+    color: var(--gray-color);
+    font-weight: 600;
+}

@@ -130,4 +130,9 @@ table {
 
 :root {
   --gray-color: #9EA2AD;
+  --white-color: #fff;
+}
+
+.svg_icons {
+  transform: scale(1.8);
 }
