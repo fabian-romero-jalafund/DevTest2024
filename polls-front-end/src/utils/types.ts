@@ -11,7 +11,7 @@ export interface Option {
 }
 
 export interface Vote {
-  optionId: number;
+  optionId?: number;
   voterEmail: string;
   pollId: number;
   id?: number;

@@ -9,7 +9,6 @@ import {
   Menu,
   MenuItem,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -17,13 +16,13 @@ import OptionPercentage from "../OptionPercentage/OptionPercentage";
 
 interface PollViewProps {
   poll: Poll;
+  setSelectedPoll: React.Dispatch<React.SetStateAction<Poll | null>>;
 }
 
-const PollView: React.FC<PollViewProps> = ({ poll }) => {
+const PollView: React.FC<PollViewProps> = ({ poll, setSelectedPoll }) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const isSm = useMediaQuery("(max-width: 768px)");
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log(event.currentTarget);
@@ -40,12 +39,7 @@ const PollView: React.FC<PollViewProps> = ({ poll }) => {
   }, [poll]);
 
   return (
-    <Accordion
-      expanded={expanded}
-      onClick={() => {
-        setExpanded(!expanded);
-      }}
-    >
+    <Accordion expanded={expanded}>
       <AccordionSummary
         expandIcon={
           expanded ? (
@@ -56,6 +50,9 @@ const PollView: React.FC<PollViewProps> = ({ poll }) => {
             <ExpandMoreIcon />
           )
         }
+        onClick={() => {
+          setExpanded(!expanded);
+        }}
       >
         <div>
           <Typography variant="h6">{poll.name}</Typography>
@@ -97,7 +94,9 @@ const PollView: React.FC<PollViewProps> = ({ poll }) => {
             alignItems: "flex-end",
           }}
         >
-          <Button variant="outlined">Vote</Button>
+          <Button variant="outlined" onClick={() => setSelectedPoll(poll)}>
+            Vote
+          </Button>
           <Typography variant="body1" mt={1} pr={1}>
             {pollVotes} votes
           </Typography>

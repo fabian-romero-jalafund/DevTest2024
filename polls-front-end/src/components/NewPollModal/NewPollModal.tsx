@@ -10,9 +10,16 @@ import PollModalButtons from "../PollModalButtons/PollModalButtons";
 interface NewPollModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  reload: boolean;
+  setReload: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NewPollModal: React.FC<NewPollModalProps> = ({ open, setOpen }) => {
+const NewPollModal: React.FC<NewPollModalProps> = ({
+  open,
+  setOpen,
+  setReload,
+  reload,
+}) => {
   const [pollData, setPollData] = useState<Poll>({
     name: "",
     options: [],
@@ -43,25 +50,26 @@ const NewPollModal: React.FC<NewPollModalProps> = ({ open, setOpen }) => {
     if (validate()) {
       try {
         setLoading(true);
-      const response = await fetch(`${API_URL}${Endpoints.POLLS}`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(pollData),
-      });
+        const response = await fetch(`${API_URL}${Endpoints.POLLS}`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(pollData),
+        });
 
-      if (response.ok) {
-        setSuccess(true);
-        setSentToValidate(false);
-        setTimeout(() => {
-          hideModal();
-        }, 2000);
-      } else setError(true);
-      setLoading(false);
+        if (response.ok) {
+          setSuccess(true);
+          setSentToValidate(false);
+          setTimeout(() => {
+            hideModal();
+            setReload(!reload);
+          }, 2000);
+        } else setError(true);
+        setLoading(false);
       } catch (error) {
-        setError(true)
+        setError(true);
       }
     }
   };

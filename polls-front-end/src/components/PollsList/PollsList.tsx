@@ -4,7 +4,12 @@ import { API_URL, Endpoints } from "../../utils/constants";
 import { CircularProgress, Typography } from "@mui/material";
 import PollView from "../PollView";
 
-const PollsList: React.FC = () => {
+interface PollsListProps {
+  reload: boolean;
+  setSelectedPoll: React.Dispatch<React.SetStateAction<Poll | null>>
+}
+
+const PollsList: React.FC<PollsListProps> = ({ reload, setSelectedPoll }) => {
   const [polls, setPolls] = useState<Poll[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -26,7 +31,7 @@ const PollsList: React.FC = () => {
     };
 
     fetchPolls();
-  }, []);
+  }, [reload]);
 
   return (
     <>
@@ -37,7 +42,7 @@ const PollsList: React.FC = () => {
       ) : (
         <>
           {polls.map((poll) => (
-            <PollView key={poll.id + "poll"} poll={poll} />
+            <PollView key={poll.id + "poll"} poll={poll} setSelectedPoll={setSelectedPoll} />
           ))}
         </>
       )}

@@ -17,10 +17,19 @@ const OptionPercentage: React.FC<OptionPercentageProps> = ({
 
   return (
     <div style={{ marginTop: 4 }}>
-      <Grid container justifyContent={"center"} alignItems={"center"} spacing={1}>
+      <Grid
+        container
+        justifyContent={"center"}
+        alignItems={"center"}
+        spacing={1}
+      >
         <Grid size={{ xs: 11 }}>
           <Typography className={styles.text}>{option.name}</Typography>
-          <LinearProgress variant="determinate" value={percentage || 0} />
+          <LinearProgress
+            style={{ height: 8, borderRadius: 12 }}
+            variant="determinate"
+            value={percentage || 0}
+          />
         </Grid>
         <Grid size={{ xs: 1 }}>
           <Typography className={styles.text}>{percentage || 0}%</Typography>
