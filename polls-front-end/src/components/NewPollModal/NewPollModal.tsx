@@ -41,7 +41,8 @@ const NewPollModal: React.FC<NewPollModalProps> = ({ open, setOpen }) => {
     setError(false);
     setSentToValidate(true);
     if (validate()) {
-      setLoading(true);
+      try {
+        setLoading(true);
       const response = await fetch(`${API_URL}${Endpoints.POLLS}`, {
         method: "POST",
         headers: {
@@ -59,6 +60,9 @@ const NewPollModal: React.FC<NewPollModalProps> = ({ open, setOpen }) => {
         }, 2000);
       } else setError(true);
       setLoading(false);
+      } catch (error) {
+        setError(true)
+      }
     }
   };
 
