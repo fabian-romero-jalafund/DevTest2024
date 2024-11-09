@@ -10,5 +10,6 @@ const controller: PollController = pollContainer.get(
 
 pollRouter.post("/polls", controller.onCreatePoll);
 pollRouter.get("/polls", controller.onGetPolls);
+pollRouter.post("/polls/:id/votes", controller.onVoteOptionPoll);
 
 export default pollRouter;
