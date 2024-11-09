@@ -1,10 +1,10 @@
 import { Container } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import HomeTitle from "../components/HomeTitle/HomeTitle";
 import NewPollModal from "../components/NewPollModal";
 import PollsList from "../components/PollsList";
 import { Poll } from "../utils/types";
-import VoteModal from "../components/VoteModal/VoteModal";
+import VoteModal from "../components/VoteModal";
 
 const Home: React.FC = () => {
   const [openNewPollModal, setOpenNewPollModal] = useState(false);
@@ -28,6 +28,8 @@ const Home: React.FC = () => {
             if (val === false) setSelectedPoll(null);
           }}
           poll={selectedPoll}
+          reload={reload}
+          setReload={setReload}
         />
       )}
     </Container>

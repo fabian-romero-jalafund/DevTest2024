@@ -13,7 +13,7 @@ const OptionPercentage: React.FC<OptionPercentageProps> = ({
   option,
   totalVotes,
 }) => {
-  const percentage = ((option.votes ?? 0) * 100) / totalVotes;
+  const percentage = Math.round(((option.votes ?? 0) * 100) / totalVotes);
 
   return (
     <div style={{ marginTop: 4 }}>

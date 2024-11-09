@@ -65,7 +65,7 @@ const NewPollModal: React.FC<NewPollModalProps> = ({
           setTimeout(() => {
             hideModal();
             setReload(!reload);
-          }, 2000);
+          }, 1200);
         } else setError(true);
         setLoading(false);
       } catch (error) {
