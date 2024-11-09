@@ -1,9 +1,13 @@
-import React from 'react'
+import { Container } from "@mui/material";
+import React from "react";
+import HomeTitle from "../components/HomeTitle/HomeTitle";
 
 const Home: React.FC = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <Container>
+        <HomeTitle/>
+    </Container>
+  );
+};
 
-export default Home
+export default Home;
